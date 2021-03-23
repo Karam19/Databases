@@ -1,0 +1,64 @@
+alter table banking
+add bankname varchar(255);
+
+update banking
+set bankname = 'Sperbank'
+where id = 1 or id =3
+
+update banking
+set bankname = 'Tinkoff'
+where id = 2
+
+insert into banking
+values (4,'Fees',0,'Sper and  Tink')
+
+BEGIN TRANSACTION;
+savepoint T0;
+
+UPDATE banking
+set credit = credit - 500
+where id = 1
+;
+UPDATE banking
+set credit = credit + 500
+where id = 3
+;
+
+savepoint T1;
+
+
+BEGIN TRANSACTION;
+UPDATE banking
+set credit = credit - 730
+where id = 2
+;
+UPDATE banking
+set credit = credit + 700
+where id = 1
+;
+update banking
+set credit = credit + 30
+where id = 4
+
+savepoint T2;
+
+
+
+BEGIN TRANSACTION;
+UPDATE banking
+set credit = credit - 130
+where id = 2
+;
+UPDATE banking
+set credit = credit + 100
+where id = 3
+;
+update banking
+set credit = credit + 30
+where id = 4
+
+savepoint T3;
+
+rollback to T1;
+rollback to T0;
+commit;
