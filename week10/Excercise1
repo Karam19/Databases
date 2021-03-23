@@ -41,3 +41,4 @@ savepoint T3;
 
 rollback to T1;
 rollback to T0;
+commit;
