@@ -1,4 +1,6 @@
 BEGIN TRANSACTION;
+savepoint T0;
+
 UPDATE banking
 set credit = credit - 500
 where id = 1
@@ -38,3 +40,4 @@ where id = 3
 savepoint T3;
 
 rollback to T1;
+rollback to T0;
