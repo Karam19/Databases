@@ -1,0 +1,40 @@
+BEGIN TRANSACTION;
+UPDATE banking
+set credit = credit - 500
+where id = 1
+;
+UPDATE banking
+set credit = credit + 500
+where id = 3
+;
+
+savepoint T1;
+
+
+BEGIN TRANSACTION;
+UPDATE banking
+set credit = credit - 700
+where id = 2
+;
+UPDATE banking
+set credit = credit + 700
+where id = 1
+;
+
+savepoint T2;
+
+
+
+BEGIN TRANSACTION;
+UPDATE banking
+set credit = credit - 100
+where id = 2
+;
+UPDATE banking
+set credit = credit + 100
+where id = 3
+;
+
+savepoint T3;
+
+rollback to T1;
