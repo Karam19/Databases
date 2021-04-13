@@ -1,0 +1,49 @@
+Part1:
+create (a:fighter {name: "Khabib Nurmagomedov", weight:"155"}),(b:fighter {name: "Rafael Dos Anjos", weight:"155"}), (a)-[:beats]->(b);
+
+match (a:fighter) return a;
+
+match (a:fighter) where a.name = "Rafael Dos Anjos" 
+create (b:fighter {name: "Neil Magny", weight: "170"}),
+(c:fighter {name: "Jon Jones", weight: "205"}),
+(d:fighter {name: "Daniel Cormier", weight: "205"}),
+(e:fighter {name: "Michael Bisping", weight: "185"}),
+(f:fighter {name: "Matt Hamill", weight: "185"}),
+(g:fighter {name: "Brandon Vera", weight: "205"}),
+(h:fighter {name: "Frank Mir", weight: "230"}),
+(i:fighter {name: "Brock Lesnar", weight: "205"}),
+(j:fighter {name: "Kelvin Gastelum", weight: "205"}),
+(a)-[:beats]-> (b),
+(c)-[:beats]-> (d),
+(e)-[:beats]-> (f),
+(c)-[:beats]-> (g),
+(g)-[:beats]-> (h),
+(h)-[:beats]-> (i),
+(b)-[:beats]-> (j),
+(j)-[:beats]-> (e),
+(e)-[:beats]-> (f),
+(e)-[:beats]-> (j),
+(f)-[:beats]-> (c);
+
+
+Part 2:
+
+match (a:fighter)-[:beats]->(b) 
+with a, b, count(b) as cnt
+where a.weight in ["155", "170", "185"] and cnt > 0 return a, count(b);
+
+match (a:fighter)-[:beats]->(b)-[:beats]->(a) return a;
+
+MATCH p=(start)-[*]->(finish)
+WHERE start.name = "Khabib Nurmagomedov" And finish.name <>"Rafael Dos Anjos"
+FOREACH (n IN nodes(p) | SET n.marked = true) return finish
+
+match (a:fighter)
+where not (a)-[:beats]->()
+return a;
+
+match (a:fighter)
+where not (a)<-[:beats]-()
+return a;
+
+
