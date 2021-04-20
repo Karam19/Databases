@@ -1,0 +1,10 @@
+MULTI
+HMSET user_id:001 username Karam13 name "Karam Shbeb" Followers 135 Following 256 Post 54
+ZADD user_id 001 username:karam13
+EXEC
+
+MULTI
+HMSET Posts:1001 post_text "Hello There!" date 20/4/21 time 17:26
+QUEUED
+ZADD Posts 1001 user_id:001
+EXEC
