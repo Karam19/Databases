@@ -1,0 +1,80 @@
+MULTI
+HMSET Customers:001 first_name "Jane" last_name "Doe"
+ZADD customer_list 001 Customers:001
+EXEC
+
+MULTI
+HMSET Customers:002 first_name "John" last_name "Doe"
+ZADD customer_list 002 Customers:002
+EXEC
+
+MULTI
+HMSET Customers:003 first_name "Jane" last_name "Smith"
+ZADD customer_list 003 Customers:003
+EXEC
+
+MULTI
+HMSET Customers:004 first_name "John" last_name "Smith"
+ZADD customer_list 004 Customers:004
+EXEC
+
+MULTI
+HMSET Customers:005 first_name "Jane" last_name "Jones"
+ZADD customer_list 005 Customers:005
+EXEC
+
+MULTI
+HMSET Customers:006 first_name "John" last_name "Jones"
+ZADD customer_list 006 Customers:006
+EXEC
+
+
+## Second table
+
+MULTI
+HMSET Orders:1001 customer_num 002 order_data 10/10/09 order_total 250.85
+ZADD order_numb 1001 order_numb:1001
+ZADD order_total 250.8 order_numb:1001
+EXEC
+
+MULTI
+HMSET Orders:1002 customer_num 002 order_data 2/21/10 order_total 125.89
+ZADD order_numb 1002 order_numb:1002
+ZADD order_total 125.89 order_numb:1002
+EXEC
+
+MULTI
+HMSET Orders:1003 customer_num 003 order_data 11/15/09 order_total 1567.99
+ZADD order_numb 1003 order_numb:1003
+ZADD order_total 1567.99 order_numb:1003
+EXEC
+
+MULTI
+HMSET Orders:1004 customer_num 004 order_data 11/22/09 order_total 180.92
+ZADD order_numb 1004 order_numb:1004
+ZADD order_total 180.92 order_numb:1004
+EXEC
+
+MULTI
+HMSET Orders:1005 customer_num 004 order_data 12/15/09 order_total 565.00
+ZADD order_numb 1005 order_numb:1005
+ZADD order_total 565.00 order_numb:1005
+EXEC
+
+MULTI
+HMSET Orders:1006 customer_num 006 order_data 11/22/09 order_total 25.00
+ZADD order_numb 1006 order_numb:1006
+ZADD order_total 25.00 order_numb:1006
+EXEC
+
+MULTI
+HMSET Orders:1007 customer_num 006 order_data 10/8/09 order_total 85.00
+ZADD order_numb 1007 order_numb:1007
+ZADD order_total 85.00 order_numb:1007
+EXEC
+
+MULTI
+HMSET Orders:1008 customer_num 006 order_data 11/29/09 order_total 109.12
+ZADD order_numb 1008 order_numb:1008
+ZADD order_total 109.12 order_numb:1008
+EXEC
